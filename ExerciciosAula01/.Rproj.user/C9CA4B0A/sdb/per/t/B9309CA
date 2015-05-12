@@ -1,0 +1,17 @@
+{
+    "contents" : "Aula 01\n========================================================\n\nExercício 1\n-----------\n\n* Faça a carga do dataset iris.\n* Exclua o atributo Species do dataset.\n\n```{r}\ndata(iris)\niris$Species <- NULL\n```\n\n* Calcule a correlação entre os atributos restantes.\n\n```{r}\ncor(iris)\n````\n\n* Imprima gráficos que demonstram a correlação positiva alta no caso de alguns atributos.\n\n```{r fig.width=7, fig.height=6}\nplot(iris$Petal.Length, iris$Sepal.Length, pch=19, col='red')\n```\n\n* Imprima gráficos que demonstram a não correlação entre atributos.\n\n```{r fig.width=7, fig.height=6}\nplot(iris$Sepal.Width, iris$Sepal.Length, pch=19, col='red')\n```\n\n* Calcule o desvio padrão dos atributos. Para aquele atributo com maior desvio padrão e para aquele atributo com menor desvio padrão imprima gráficos de histograma.\n\n```{r}\nsapply(iris, sd)\n```\n  \n```{r fig.width=7, fig.height=6}\nhist(iris$Sepal.Width, main=\"Menor SD encontrado\", col='cyan', xlim=c(2,8))\nhist(iris$Sepal.Length, main=\"Maior SD encontrado\", col='cyan', xlim=c(2,8))\n```\n\n* Teste o comando summary(iris). O que ele retorna? Comente o resultado.\n\n```{r}\nsummary(iris)\n````\n\nExercício 2\n-----------\n\n* Faça a carga do dataset survey da biblioteca UsingR\n\n```{r}\nlibrary(UsingR)\ndata(survey)\n```\n\n* Descreva os atributos do dataset.\n\n```{r}\nnames(survey)\n```\n\n* Atributos:\n  * Sex: sexo do estudante;\n  * Wr.Hnd: distância, em centímetros, entre o dedão e o dedinho com a mão espalmada. Usando a mão que a pessoa escreve;\n  * NW.Hnd: distãncia, em centímetros, entre o dedão e o dedinho com a mão espalmada. Usando a mão que a pessoa não escreve;\n  * W.Hnd: mão que o estudante escreve;\n  * Fold: quando alguém pede para cruzar os braços, qual braço fica por cima? (R on L, L on R, nenhum dos dois);\n  * Pulse: pulsação do estudante. Batidas por minuto;\n  * Clap: bater palma. Qual a mão que fica por cima? (Direita, Esquerda ou nenhuma);\n  * Exer: com que frenqüência faz exercícios;\n  * Smoke: quanto o estudante fuma;\n  * Height: altura do estudante em centímetros;\n  * M.I.: que unidadeo estudante usa para falar sobre a sua altura. Em centímetros (metric) ou em feet (medida imperial);\n  * Age: idade em anos do estudante.\n\n* Existem valores NA no dataset? Quantos?\n\n```{r}\nsum(is.na(survey))\n```\n\n* Qual o percentual do dataset escreve com a mão esquerda?\n\n```{r}\nprop.table(table(survey$W.Hnd))\n```\n\n* Quantos exemplos do dataset são do sexo feminino?\n\n```{r}\ntable(survey$Sex)\n```\n\n* Faça uma análise exploratória dos dados e descreve os achados\n  que você considera mais ``interessantes''.\n\n```{r fig.width=7, fig.height=6}\nlibrary(ggplot2)\nqplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$Sex, size=survey$Height)\nqplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$W.Hnd, size=survey$Pulse)\n```\n\n\n",
+    "created" : 1431394320209.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1050144752",
+    "id" : "B9309CA",
+    "lastKnownWriteTime" : 1431430603,
+    "path" : "~/Documents/aulas/bandtec/posGraduacao/workspace/ExerciciosAula01/scripts/Aula01.Rmd",
+    "project_path" : "scripts/Aula01.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

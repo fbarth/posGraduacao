@@ -1,0 +1,127 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{dentitle}
+\usepackage{personal}
+
+\renewcommand{\rmdefault}{cmss}
+
+\begin{document}
+
+\title{Exercícios sobre Análise Exploratória com R}
+\author{Prof. Fabrício Jailson Barth}
+\date{$1^{o}$ semestre de 2015}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
+  em Big Data}{}
+
+\section{Questões gerais sobre R}
+
+\begin{itemize}
+\item O que é data.frame?
+\item O que é tipo factor?
+\item Qual é o tipo utilizado em R para representar números contínuos?
+\item O que a função sapply faz?
+\item O que a função summary faz?
+\end{itemize}
+
+\section{Exercício 1}
+
+\begin{itemize}
+\item Faça a carga do dataset iris.
+\item Exclua o atributo Species do dataset.
+\item Calcule a correlação entre os atributos restantes.
+\item Imprima gráficos que demonstram a correlação positiva alta no caso de
+  alguns atributos.
+\item Imprima gráficos que demonstram a não correlação entre atributos.
+\item Calcule o desvio padrão dos atributos. Para aquele atributo com
+  maior desvio padrão e para aquele atributo com menor desvio padrão
+  imprima gráficos de histograma.
+\item Teste o comando summary(iris). O que ele retorna? Comente o resultado.
+\end{itemize}
+
+\section{Exercício 2}
+
+\begin{itemize}
+\item Faça a carga do dataset survey da biblioteca UsingR
+\item Descreva os atributos do dataset.
+\item Existem valores NA no dataset? Quantos?
+\item Qual o percentual do dataset escreve com a mão esquerda?
+\item Quantos exemplos do dataset são do sexo feminino?
+\item Faça uma análise exploratória dos dados e descreve os achados
+  que você considera mais ``interessantes''.
+\end{itemize}
+
+\section{Exercício 3}
+
+\begin{itemize}
+\item Faça o download do arquivo que está em http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all\_month.csv
+\item Usando o comando read.csv do R\footnote{Se você tiver dúvidas
+    sobre o uso desta função então digite help(read.csv)}, importe as
+  informações do arquivo all\_month.csv em um data.frame.
+\item Entenda melhor o significado de cada atributo acessando o site
+  http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php.
+\item Usando a função 
+
+\begin{alltt}
+diaHorario <- date()
+\end{alltt}
+
+armazene o dia e horário quando os dados foram coletados.
+
+\item Qual a quantidade de exemplos (abalos) foi coletada?
+
+\item Quantos exemplos existem no dataset?
+ 
+\item Quais são os tipos de cada atributo?
+
+\item O R conseguiu importar corretamente todos os atributos com os
+  tipos corretos?
+
+\item Quantos tipos distintos de abalos existem no dataset?
+
+\item Existe alguma correlação entre a profundidade do abalo sísmico
+  (\textit{depth}) e a magnitude (\textit{mag}) do abalo? Faça uso de
+  algum gráfico para suportar a sua resposta.
+\end{itemize}
+
+\section{Desafios}
+
+\begin{itemize}
+\item O dataset com abalos sísmicos possui um atributo chamado
+  \textit{time}. Como o próprio nome diz, este atributo é um atributo
+  do tipo \textit{time}. No entanto, ele foi importado como
+  \textit{factor} - o que está errado. Converta os valores deste
+  atributo para o tipo correto. Depois de convertido, tente utilizar
+  esta informação criando plots com séries temporais.
+
+\item Cada registro possui uma latitude e uma longitude. Portanto, é
+  possível plotar as informações dos abalos sísmicos em um mapa. Que
+  tal tentar?
+
+\end{itemize}
+
+\section{Sites interessantes para serem navegados}
+
+\begin{itemize}
+\item http://catalog.data.gov/dataset
+\item https://www.kaggle.com/
+\end{itemize}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

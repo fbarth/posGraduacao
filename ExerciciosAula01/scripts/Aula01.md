@@ -195,3 +195,104 @@ table(survey$Sex)
 
 * Faça uma análise exploratória dos dados e descreve os achados
   que você considera mais ``interessantes''.
+
+
+```r
+library(ggplot2)
+qplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$Sex, size=survey$Height)
+```
+
+```
+## Warning: Removed 29 rows containing missing values (geom_point).
+```
+
+![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-1.png) 
+
+```r
+qplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$W.Hnd, size=survey$Pulse)
+```
+
+```
+## Warning: Removed 46 rows containing missing values (geom_point).
+```
+
+![plot of chunk unnamed-chunk-13](figure/unnamed-chunk-13-2.png) 
+
+
+Exercício 3
+-----------
+
+* Faça o download do arquivo que está em http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv
+* Usando o comando read.csv do R, importe as informações do arquivo all\_month.csv em um data.frame.
+
+
+```r
+abalos <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")
+```
+
+* Entenda melhor o significado de cada atributo acessando o site http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php.
+
+* Armazene o dia e horário quando os dados foram coletados.
+
+
+```r
+diaHorario <- date()
+```
+
+* Qual a quantidade de exemplos (abalos) foi coletada? Quantos exemplos existem no dataset?
+
+
+```r
+dim(abalos)
+```
+
+```
+## [1] 9784   15
+```
+ 
+* Quais são os tipos de cada atributo?
+
+
+```r
+sapply(abalos, class)
+```
+
+```
+##      time  latitude longitude     depth       mag   magType       nst 
+##  "factor" "numeric" "numeric" "numeric" "numeric"  "factor" "integer" 
+##       gap      dmin       rms       net        id   updated     place 
+## "numeric" "numeric" "numeric"  "factor"  "factor"  "factor"  "factor" 
+##      type 
+##  "factor"
+```
+
+* O R conseguiu importar corretamente todos os atributos com os tipos corretos?
+
+* Quantos tipos distintos de abalos existem no dataset?
+
+
+```r
+levels(abalos$type)
+```
+
+```
+## [1] "chemical explosion" "earthquake"         "explosion"         
+## [4] "quarry blast"
+```
+
+* Existe alguma correlação entre a profundidade do abalo sísmico (depth) e a magnitude (mag) do abalo? Faça uso de algum gráfico para suportar a sua resposta.
+
+
+```r
+cor(abalos$depth, abalos$mag)
+```
+
+```
+## [1] 0.3725511
+```
+
+```r
+plot(abalos$depth, abalos$mag, pch=19, col="green")
+```
+
+![plot of chunk unnamed-chunk-19](figure/unnamed-chunk-19-1.png) 

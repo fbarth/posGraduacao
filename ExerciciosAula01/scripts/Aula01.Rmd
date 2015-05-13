@@ -16,7 +16,7 @@ iris$Species <- NULL
 
 ```{r}
 cor(iris)
-````
+```
 
 * Imprima gráficos que demonstram a correlação positiva alta no caso de alguns atributos.
 
@@ -45,7 +45,7 @@ hist(iris$Sepal.Length, main="Maior SD encontrado", col='cyan', xlim=c(2,8))
 
 ```{r}
 summary(iris)
-````
+```
 
 Exercício 2
 -----------
@@ -98,10 +98,114 @@ table(survey$Sex)
 * Faça uma análise exploratória dos dados e descreve os achados
   que você considera mais ``interessantes''.
 
-```{r fig.width=7, fig.height=6}
+```{r fig.width=9, fig.height=6}
 library(ggplot2)
 qplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$Sex, size=survey$Height)
 qplot(survey$Wr.Hnd, survey$NW.Hnd, col=survey$W.Hnd, size=survey$Pulse)
 ```
 
 
+Exercício 3
+-----------
+
+* Faça o download do arquivo que está em http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv
+* Usando o comando read.csv do R, importe as informações do arquivo all\_month.csv em um data.frame.
+
+```{r}
+abalos <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")
+```
+
+* Entenda melhor o significado de cada atributo acessando o site http://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php.
+
+* Armazene o dia e horário quando os dados foram coletados.
+
+```{r}
+diaHorario <- date()
+```
+
+* Qual a quantidade de exemplos (abalos) foi coletada? Quantos exemplos existem no dataset?
+
+```{r}
+dim(abalos)
+```
+ 
+* Quais são os tipos de cada atributo?
+
+```{r}
+sapply(abalos, class)
+```
+
+* O R conseguiu importar corretamente todos os atributos com os tipos corretos?
+
+* Quantos tipos distintos de abalos existem no dataset?
+
+```{r}
+levels(abalos$type)
+```
+
+* Existe alguma correlação entre a profundidade do abalo sísmico (depth) e a magnitude (mag) do abalo? Faça uso de algum gráfico para suportar a sua resposta.
+
+```{r}
+cor(abalos$depth, abalos$mag)
+```
+
+```{r fig.width=9, fig.height=6}
+plot(abalos$depth, abalos$mag, pch=19, col="green")
+```
+
+```{r fig.width=9, fig.height=6}
+qplot(abalos$depth, abalos$mag, col=abalos$type, 
+      xlab="Profundidade", ylab="Magnitude")
+```
+
+```{r fig.width=9, fig.height=6}
+boxplot(abalos$mag ~ abalos$type, 
+        col=c('red','blue','cyan','green'), 
+        main="Comparativo de magnitude", 
+        ylab="Magnitude")
+```
+
+
+Desafios
+--------
+
+* O dataset com abalos sísmicos possui um atributo chamado ~~time~~. Como o próprio nome diz, este atributo é um atributo do tipo ~~time~~. No entanto, ele foi importado como ~~factor~~ - o que está errado. Converta os valores deste atributo para o tipo correto. Depois de convertido, tente utilizar esta informação criando plots com séries temporais.
+
+```{r fig.width=7, fig.height=6}
+datas <- as.Date(abalos$time, "%Y-%m-%dT%H:%M:%S")
+eventos <- as.data.frame(table(datas))
+names(eventos) <- c('data','quantidade')
+eventos$data <- as.Date(eventos$data, "%Y-%m-%d")
+plot(eventos$data, eventos$quantidade, type='o', xlab="Período", ylab="Quantidade de abalos"
+     , main="Quantidade de abalos sísmicos por dia", col='red')
+```
+
+* Cada registro possui uma latitude e uma longitude. Portanto, é possível plotar as informações dos abalos sísmicos em um mapa. Que tal tentar?
+
+```{r fig.width=10, fig.height=9}
+library(maps)
+library(mapdata)
+map()
+points(abalos$longitude, abalos$latitude, col=2, pch=20)
+```
+
+```{r fig.width=10, fig.height=9}
+library(maps)
+library(mapdata)
+map()
+points(abalos$longitude, abalos$latitude, col=abalos$type, pch=20)
+```
+
+```{r fig.width=10, fig.height=9}
+library(maps)
+library(mapdata)
+map()
+points(abalos$longitude, abalos$latitude, col=abalos$mag, pch=20)
+```
+
+```{r fig.width=10, fig.height=9}
+library(maps)
+library(mapdata)
+map()
+points(abalos$longitude, abalos$latitude, col=abalos$magType, pch=20)
+```

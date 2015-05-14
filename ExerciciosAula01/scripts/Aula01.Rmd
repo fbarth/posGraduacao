@@ -182,30 +182,31 @@ plot(eventos$data, eventos$quantidade, type='o', xlab="Período", ylab="Quantida
 
 * Cada registro possui uma latitude e uma longitude. Portanto, é possível plotar as informações dos abalos sísmicos em um mapa. Que tal tentar?
 
-```{r fig.width=10, fig.height=9}
+```{r fig.width=10, fig.height=10}
 library(maps)
 library(mapdata)
-map()
+map(mar = c(0.1, 0.1, 0.1, 0.1), myborder=0.00001)
 points(abalos$longitude, abalos$latitude, col=2, pch=20)
 ```
 
-```{r fig.width=10, fig.height=9}
+```{r fig.width=10, fig.height=10}
 library(maps)
 library(mapdata)
-map()
+map(mar = c(0.1, 0.1, 0.1, 0.1), myborder=0.00001)
 points(abalos$longitude, abalos$latitude, col=abalos$type, pch=20)
+legend("topright", 
+       legend = levels(abalos$type), 
+       text.col = 1:length(abalos$type),
+       cex=0.6)
 ```
 
-```{r fig.width=10, fig.height=9}
+```{r fig.width=10, fig.height=10}
 library(maps)
 library(mapdata)
-map()
-points(abalos$longitude, abalos$latitude, col=abalos$mag, pch=20)
-```
-
-```{r fig.width=10, fig.height=9}
-library(maps)
-library(mapdata)
-map()
+map(mar = c(0.1, 0.1, 0.1, 0.1), myborder=0.00001)
 points(abalos$longitude, abalos$latitude, col=abalos$magType, pch=20)
+legend("topright", 
+       legend = levels(abalos$magType), 
+       text.col = 1:length(abalos$magType),
+       cex=0.6)
 ```

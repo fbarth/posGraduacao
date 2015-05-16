@@ -1,0 +1,85 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{dentitle}
+\usepackage{personal}
+
+\renewcommand{\rmdefault}{cmss}
+
+\begin{document}
+
+\title{Exercícios sobre Clustering com R}
+\author{Prof. Fabrício Jailson Barth}
+\date{$1^{o}$ semestre de 2015}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
+  em Big Data}{}
+
+\section{Questões sobre cluster plano}
+
+\begin{enumerate}
+\item Utilizando o dataset \textbf{ruspini} do pacote
+  \textbf{cluster}, execute uma análise de cluster utilizando o
+  algoritmo \textbf{k-means}.
+\item Faça uma análise de cluster utilizando o dataset sobre
+  \textbf{abalos sísmicos} do exercício anterior. Considere apenas as
+  variáveis de \textbf{longitude} e \textbf{latitude}. 
+\item Imprima a informação dos clusters em um mapa georeferenciado - o
+  mesmo utilizado no exercício anterior.
+\item Faça uma análise de cluster utilizando o dataset
+  \textbf{survey}, atributos \textbf{Age} e \textbf{Height},
+  do pacote \textbf{UsingR}. Implemente três cenários diferentes: 
+\begin{enumerate}
+\item Com os valores originais;
+\item Com os valores da altura (Height) em metros, e;
+\item Com os valores da altura (Height) e idade (Age) devidamente
+  normalizados. 
+\end{enumerate} 
+
+Comente o que acontece em cada um dos casos.
+
+\item Utilizando o dataset \textbf{survey}, atributos \textbf{Exer}
+  (sobre o hábito de fazer exercícios) e \textbf{Smoke} (sobre o
+  hábito de fumar), faça uma análise de cluster deste dataset. 
+
+\item Levando-se em consideração o dataset do item anterior, inclua o
+  atributo de sexo (\textbf{Sex}) e faça a mesma análise.
+
+\end{enumerate}
+
+\section{Questões sobre cluster hierárquico}
+
+
+
+\section{Códigos que podem ser úteis}
+
+\begin{alltt}
+elbow <- function(dataset)\{
+  wss <- numeric(15)
+  for (i in 1:15) 
+    wss[i] <- sum(kmeans(dataset,centers=i, 
+                  nstart=100)$withinss)
+  plot(1:15, wss, type="b", main="Elbow method", 
+       xlab="Number of Clusters",
+       ylab="Within groups sum of squares", 
+       pch=8, col="red")
+\}
+\end{alltt}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

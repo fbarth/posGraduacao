@@ -15,23 +15,35 @@
 
 \begin{document}
 
-\title{Exercícios sobre Clustering com R}
+\title{Exercícios sobre Clustering com R - EP3}
 \author{Prof. Fabrício Jailson Barth}
 \date{$1^{o}$ semestre de 2015}
-\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
-  em Big Data}{}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes -
+  BandTec}{Sistemas Inteligentes}{}
 
-\section{Questões sobre cluster plano}
+\section{Questões sobre clustering}
 
 \begin{enumerate}
 \item Utilizando o dataset \textbf{ruspini} do pacote
   \textbf{cluster}, execute uma análise de cluster utilizando o
   algoritmo \textbf{k-means}.
 \item Faça uma análise de cluster utilizando o dataset sobre
-  \textbf{abalos sísmicos} do exercício anterior. Considere apenas as
-  variáveis de \textbf{longitude} e \textbf{latitude}. 
-\item Imprima a informação dos clusters em um mapa georeferenciado - o
-  mesmo utilizado no exercício anterior.
+  \textbf{abalos sísmicos} do site
+  \footnote{http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all\_month.csv}. Considere
+  apenas as variáveis de \textbf{profundidade} e \textbf{magnitude}. 
+\item Imprima a informação dos clusters em um mapa
+  georeferenciado. Para imprimir pontos em um mapa georeferenciado
+  você pode utilizar o código abaixo:
+
+\begin{alltt}
+library(maps)
+library(mapdata)
+map(mar = c(0.1, 0.1, 0.1, 0.1), myborder=0.00001)
+points(abalos$longitude, abalos$latitude, col=2, pch=20)
+\end{alltt}
+
+Você identificou algum padrão que você considere relevante?
+
 \item Faça uma análise de cluster utilizando o dataset
   \textbf{survey}, atributos \textbf{Age} e \textbf{Height},
   do pacote \textbf{UsingR}. Implemente três cenários diferentes: 
@@ -51,24 +63,7 @@ Comente o que acontece em cada um dos casos.
 \item Levando-se em consideração o dataset do item anterior, inclua o
   atributo de sexo (\textbf{Sex}) e faça a mesma análise.
 
-\item Faça a carga do dataset \textbf{Animals} do pacote \textbf{MASS}
-  e faça uma análise de cluster considerando os dados que estão no
-  dataset \textbf{Animals}. Responda as seguites perguntas:
-
-\begin{itemize}
-\item Que método você utilizou para determinar o número de clusters ideal?
-\item Houve algum tipo de pré-processamento? Em caso positivo, qual
-  foi a razão para este pré-processamento?
-\item Qual é o número de clusters ideal que você encontrou?
-\item Faça uma descrição mais alto nível para cada cluster encontrado.
-\end{itemize}
-
 \end{enumerate}
-
-\section{Questões sobre cluster hierárquico}
-
-TBD
-
 
 \section{Códigos que podem ser úteis}
 
@@ -84,6 +79,12 @@ elbow <- function(dataset)\{
        pch=8, col="red")
 \}
 \end{alltt}
+
+\section{Método de entrega}
+
+Este trabalho deverá ser realizado em dupla. A data máxima para
+entrega é no dia 26 de maio de 2015. A entrega deve ser realizada em
+sala de aula.
 
 \end{document}
 

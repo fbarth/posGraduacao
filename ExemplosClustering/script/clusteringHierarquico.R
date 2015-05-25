@@ -20,7 +20,7 @@ x <- rnorm(10,mean=rep(1:3,each=4),sd=0.2)
 y <- rnorm(10,mean=rep(c(1,2,1),each=4),sd=0.2) 
 
 png(filename = paste(dir,"datasetClusterHie.png", sep=""), 
-    height = 600, width = 800)
+    height = 600, width = 800, res = 120)
 plot(x,y,col="blue",pch=19,cex=2) 
 text(x+0.05,y+0.05,labels=as.character(1:10))
 dev.off()
@@ -32,7 +32,7 @@ print(t)
 dataFrame <- data.frame(x=x,y=y) 
 distxy <- dist(dataFrame) 
 png(filename = paste(dir,"exemploClusterHie.png", sep=""), 
-    height = 800, width = 800)
+    height = 800, width = 800, res=120)
 hClustering <- hclust(distxy) 
 plot(hClustering)
 dev.off()
@@ -40,7 +40,7 @@ dev.off()
 dataFrame <- data.frame(x=x,y=y) 
 distxy <- dist(dataFrame) 
 png(filename = paste(dir,"exemploClusterHieSingle.png", sep=""), 
-    height = 800, width = 800)
+    height = 800, width = 800, res = 120)
 hClustering <- hclust(distxy, "single") 
 plot(hClustering)
 dev.off()
@@ -48,7 +48,7 @@ dev.off()
 dataFrame <- data.frame(x=x,y=y) 
 distxy <- dist(dataFrame) 
 png(filename = paste(dir,"exemploClusterHieAverage.png", sep=""), 
-    height = 800, width = 800)
+    height = 800, width = 800, res = 120)
 hClustering <- hclust(distxy, "average") 
 plot(hClustering)
 dev.off()
@@ -65,21 +65,38 @@ summary(cars$dist)
 cars$speed_scale <- scale(cars$speed)
 cars$dist_scale <- scale(cars$dist)
 
-m <- dist(cars[,3:4])
+par(mfrow=c(1,1))
 
-plot(cars[,1:2], pch=19)
+png(filename = paste(dir,"pontosCars.png", sep=""), 
+    height = 800, width = 900, res = 120)
+#par(mfrow=c(1,2))
+plot(cars$speed, cars$dist, pch=21, col= "red", cex=2)
+text(cars$speed+0.05,cars$dist+0.05,labels=as.character(1:nrow(cars)))
+#plot(cars$speed_scale, cars$dist_scale, pch=19, col = "red")
+dev.off()
+
+m <- dist(cars[,3:4])
 
 # Agrupamento hierárquico formado a partir de **ligação completa**.
 
+png(filename = paste(dir,"exemploClusterHieComplete.png", sep=""), 
+    height = 800, width = 900)
 plot(hclust(m, method= "complete"))
+dev.off()
 
 # Agrupamento hierárquico formado a partir de **ligação simples**.
 
+png(filename = paste(dir,"exemploClusterHieSingle.png", sep=""), 
+    height = 800, width = 900)
 plot(hclust(m, method= "single"))
+dev.off()
 
 # Agrupamento hierárquico formado a partir da **média do grupo**
-  
+
+png(filename = paste(dir,"exemploClusterHieAverage.png", sep=""), 
+    height = 800, width = 900)  
 plot(hclust(m, method= "average"))
+dev.off()
 
 # Agrupamento plano com dois _clusters_
 

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.17)  23 MAY 2015 11:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.17)  22 MAY 2015 00:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**\input enunciadoCluster.tex
-(./enunciadoCluster.tex
+**\input enunciadoGraduacaoDB.tex
+(./enunciadoGraduacaoDB.tex
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/size10.clo
@@ -256,8 +256,8 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 \c@lemma=\count111
 )
 \c@corollary=\count112
- (./enunciadoCluster.aux)
-\openout1 = `enunciadoCluster.aux'.
+ (./enunciadoGraduacaoDB.aux)
+\openout1 = `enunciadoGraduacaoDB.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
 LaTeX Font Info:    ... okay on input line 16.
@@ -335,49 +335,46 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 22.
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 59.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 32.
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 71.
 
-LaTeX Font Info:    No file OMScmss.fd. on input line 59.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 71.
 
-
-LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 59.
-
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 76.
-
-LaTeX Font Info:    No file OMScmtt.fd. on input line 76.
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbraceleft' on input line 76.
+(Font)              for symbol `textbraceleft' on input line 71.
 
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./enunciadoCluster.aux)
+(./enunciadoGraduacaoDB.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4943 strings out of 493315
- 69685 string characters out of 6137904
+ 4955 strings out of 493315
+ 69853 string characters out of 6137904
  147899 words of memory out of 5000000
- 8314 multiletter control sequences out of 15000+600000
- 5008 words of font info for 19 fonts, out of 8000000 for 9000
+ 8321 multiletter control sequences out of 15000+600000
+ 7731 words of font info for 28 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,6n,53p,249b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,53p,253b,251s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
 usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on enunciadoCluster.pdf (1 page, 67020 bytes).
+sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></us
+r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on enunciadoGraduacaoDB.pdf (1 page, 76001 bytes).
 PDF statistics:
- 32 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 36 PDF objects out of 1000 (max. 8388607)
+ 25 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

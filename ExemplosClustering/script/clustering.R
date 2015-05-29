@@ -30,6 +30,13 @@ png(filename = paste(dir,"clusterIris3.png", sep=""),
 plot(iris, pch=21, bg=model$cluster)
 dev.off()
 
+png(filename = paste(dir,"heatmap.png", sep=""), 
+    height = 1200, width = 800)
+set.seed(143)
+dataMatrix <- as.matrix(iris)
+heatmap(dataMatrix) #, cexCol = 0.8
+dev.off()
+
 model2 <- kmeans(iris, centers = 2, nstart = 100)
 model3 <- kmeans(iris, centers = 3, nstart = 100)
 model4 <- kmeans(iris, centers = 4, nstart = 100)

@@ -72,7 +72,13 @@ png(filename = paste(dir,"pontosCars.png", sep=""),
 #par(mfrow=c(1,2))
 plot(cars$speed, cars$dist, pch=21, col= "red", cex=2)
 text(cars$speed+0.05,cars$dist+0.05,labels=as.character(1:nrow(cars)))
-#plot(cars$speed_scale, cars$dist_scale, pch=19, col = "red")
+dev.off()
+
+png(filename = paste(dir,"pontosCarsNorm.png", sep=""), 
+    height = 800, width = 900, res = 120)
+plot(cars$speed_scale, cars$dist_scale, pch=19, col = "red",
+     main="Plot dos pontos com valores normalizados")
+text(cars$speed_scale+0.05,cars$dist_scale+0.05,labels=as.character(1:nrow(cars)))
 dev.off()
 
 m <- dist(cars[,3:4])
@@ -81,21 +87,21 @@ m <- dist(cars[,3:4])
 
 png(filename = paste(dir,"exemploClusterHieComplete.png", sep=""), 
     height = 800, width = 900)
-plot(hclust(m, method= "complete"))
+plot(hclust(m, method= "complete"), main="Dendograma com ligação completa")
 dev.off()
 
 # Agrupamento hierárquico formado a partir de **ligação simples**.
 
 png(filename = paste(dir,"exemploClusterHieSingle.png", sep=""), 
     height = 800, width = 900)
-plot(hclust(m, method= "single"))
+plot(hclust(m, method= "single"), main="Dendograma com ligação simples")
 dev.off()
 
 # Agrupamento hierárquico formado a partir da **média do grupo**
 
 png(filename = paste(dir,"exemploClusterHieAverage.png", sep=""), 
     height = 800, width = 900)  
-plot(hclust(m, method= "average"))
+plot(hclust(m, method= "average"), main="Dendograma com ligação média do grupo")
 dev.off()
 
 # Agrupamento plano com dois _clusters_

@@ -13,3 +13,5 @@ sum(is.na(maos))
 maos <- maos[c(-43,-45),]
 
 model <- kmodes(maos, 3)
+model$size
+model$modes

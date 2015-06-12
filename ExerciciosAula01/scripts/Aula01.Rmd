@@ -52,7 +52,7 @@ Exercício 2
 
 * Faça a carga do dataset survey da biblioteca UsingR
 
-```{r}
+```{r }
 library(UsingR)
 data(survey)
 ```
@@ -169,7 +169,7 @@ boxplot(abalos$mag ~ abalos$type,
 Desafios
 --------
 
-* O dataset com abalos sísmicos possui um atributo chamado ~~time~~. Como o próprio nome diz, este atributo é um atributo do tipo ~~time~~. No entanto, ele foi importado como ~~factor~~ - o que está errado. Converta os valores deste atributo para o tipo correto. Depois de convertido, tente utilizar esta informação criando plots com séries temporais.
+* O dataset com abalos sísmicos possui um atributo chamado ~time~. Como o próprio nome diz, este atributo é um atributo do tipo ~time~. No entanto, ele foi importado como ~factor~ - o que está errado. Converta os valores deste atributo para o tipo correto. Depois de convertido, tente utilizar esta informação criando plots com séries temporais.
 
 ```{r fig.width=7, fig.height=6}
 datas <- as.Date(abalos$time, "%Y-%m-%dT%H:%M:%S")

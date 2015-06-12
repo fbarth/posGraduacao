@@ -1,0 +1,41 @@
+Exemplo de regras de associação em uma base de itens comprados em uma Grocery store
+===================================================================================
+
+Pacotes necessários para construir regras de associação:
+
+```{r message=FALSE, warning=FALSE}
+library(arules)
+library(arulesViz)
+```
+
+Leitura do dataset, que já é distribuido em conjunto com o pacote arules:
+
+````{r}
+data("Groceries")
+Groceries
+````
+
+Também podemos utilizar o comando *inspect(Groceries)* para ver o conteúdo de todo o dataset. 
+
+Análise de itens mais frequentes:
+
+```{r fig.width=7, fig.height=6}
+itemFrequencyPlot(Groceries, support=0.10)
+```
+
+Descoberta das regras:
+
+````{r}
+rules <- apriori(Groceries, parameter= list(supp=0.01, conf=0.4))
+inspect(rules)
+````
+
+Visualização das regras:
+
+```{r fig.width=7, fig.height=6}
+plot(rules)
+```
+
+```{r fig.width=15, fig.height=15}
+plot(rules, method="graph", control=list(type="items"))
+```

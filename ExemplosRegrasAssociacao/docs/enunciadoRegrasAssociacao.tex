@@ -1,0 +1,87 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{dentitle}
+\usepackage{personal}
+
+\renewcommand{\rmdefault}{cmss}
+
+\begin{document}
+
+\title{Exercícios sobre Regras de Associação}
+\author{Prof. Fabrício Jailson Barth}
+\date{$1^{o}$ semestre de 2015}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
+  em Big Data}{}
+
+\begin{enumerate}
+
+\item Dado a lista de cinco transações que incluem os itens A, B, C e
+  D:
+
+\begin{alltt}
+A,B,C
+A,C
+B,C
+A,D
+A,C,D
+\end{alltt}
+
+Quais são os conjuntos de itens (\textit{itemsets}) que satisfazem o
+suporte mínimo de 0,5? (Dica: um conjunto de itens pode incluir mais
+que um item)
+
+\item Um estabelecimento de varejo tem uma base de dados que
+  armazena 10.000 transações realizadas no último verão. Após analisar
+  os dados, um time de cientístas de dados identificou os seguintes
+  dados:
+
+\begin{itemize}
+\item $\{bateria\}$: foi identificado em 6.000 transações.
+\item $\{protetor solar\}$: foi identificado em 5.000 transações.
+\item $\{sandalia\}$: foi identificado em 4.000 transações.
+\item $\{tigela\}$: foi identificado em 2.000 transações.
+\item $\{bateria, protetor solar\}$: foi identificado em 1.500 transações.
+\item $\{baterial, sandalia\}$: foi identificado em .000 transações.
+\item $\{bateria, tigela\}$: foi identificado em 250 transações.
+\item $\{bateria, protetor solar, sandalia\}$: foi identificado em 600 transações.
+\end{itemize}
+
+Responda as seguintes questões:
+
+\begin{enumerate}
+\item Quais são os valores de suporte para os \textit{itemsets} acima? 
+\item Assumindo que o valor de suporte mínimo é 0,05, quais itens são
+  considerados frequentes?
+\item Quais são os valores de confiança de $\{bateria\} \rightarrow
+  \{protetor solar\}$ e $\{bateria, protetor solar\} \rightarrow
+  \{sandalia\}$? Qual das duas regras é mais interessante?
+\item Liste todas as regras candidatas que podem ser formados a partir
+  dos dados acima. Quais regras são consideradas interessantes
+  levando-se em consideração uma confiança mínima de 0,25? Quais
+  regras podem ser consideradas mais úteis (isto é, com menor
+  probabilidade de ter sido gerada por um acaso)? 
+\end{enumerate}
+
+\item 
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

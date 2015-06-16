@@ -48,6 +48,12 @@ rules <- apriori(Groceries, parameter= list(supp=0.001, conf=0.6))
 summary(rules)
 ````
 
+Visualização do dataset por completo:
+
+```{r fig.width=7, fig.height=20}
+image(sample(Groceries,500))
+```
+
 Visualização das regras:
 
 ```{r fig.width=7, fig.height=6}

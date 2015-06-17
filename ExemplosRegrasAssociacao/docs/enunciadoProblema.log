@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.17)  17 JUN 2015 11:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.9.17)  17 JUN 2015 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -332,53 +332,95 @@ e
 \c@lstlisting=\count119
 \dendenwidth=\skip47
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 22.
+(Font)              <7> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 22.
+(Font)              <5> on input line 23.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 48.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 41.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 50.
+(Font)              <8> on input line 41.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 50.
-LaTeX Font Info:    Try loading font information for OMS+cmss on input line 59.
+(Font)              <6> on input line 41.
 
-LaTeX Font Info:    No file OMScmss.fd. on input line 59.
+Overfull \hbox (37.2203pt too wide) in paragraph at lines 51--51
+[][]\OT1/cmss/m/n/8 https://raw.githubusercontent.com/fbarth/posGraduacao/maste
+r/ExemplosRegrasAssociacao/dataset/LAPD[]Crime[]and[]Collision[]Raw[]Data[]-
+ []
 
-LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 59.
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang2.sty
+File: lstlang2.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/texlive/2013/texmf-dist/tex/latex/listings/lstlang3.sty
+File: lstlang3.sty 2004/09/05 1.3 listings language file
+)
+LaTeX Font Info:    Try loading font information for OML+cmss on input line 58.
+
+LaTeX Font Info:    No file OMLcmss.fd. on input line 58.
+
+
+LaTeX Font Warning: Font shape `OML/cmss/bx/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 58.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 58.
+
+LaTeX Font Warning: Font shape `OML/cmss/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 60.
 
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (./enunciadoProblema.aux)
+<quantidadeCrimes.png, id=15, 803.0pt x 401.5pt>
+File: quantidadeCrimes.png Graphic file (type png)
+ <use quantidadeCrimes.png>
+Package pdftex.def Info: quantidadeCrimes.png used on input line 102.
+(pdftex.def)             Requested size: 802.99805pt x 401.49901pt.
+
+[2 <./quantidadeCrimes.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmss on input line 147
+.
+LaTeX Font Info:    No file OMScmss.fd. on input line 147.
+
+
+LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 147.
+
+[3] (./enunciadoProblema.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 4956 strings out of 493315
- 69821 string characters out of 6137904
- 147899 words of memory out of 5000000
- 8322 multiletter control sequences out of 15000+600000
- 7919 words of font info for 28 fonts, out of 8000000 for 9000
+ 6088 strings out of 493315
+ 81832 string characters out of 6137904
+ 212210 words of memory out of 5000000
+ 9436 multiletter control sequences out of 15000+600000
+ 9431 words of font info for 33 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,8n,53p,250b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,8n,74p,380b,2065s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb>
-</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
-usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></u
-sr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr
-/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></us
-r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on enunciadoProblema.pdf (2 pages, 72662 bytes).
+</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></
+usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
+r/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr
+/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/l
+ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/lo
+cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/lo
+cal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
+al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
+Output written on enunciadoProblema.pdf (3 pages, 150588 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

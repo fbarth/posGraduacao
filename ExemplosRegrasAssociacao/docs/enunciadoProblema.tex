@@ -1,0 +1,194 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{dentitle}
+\usepackage{personal}
+
+\renewcommand{\rmdefault}{cmss}
+
+\begin{document}
+
+\title{Descobrindo regras de associação entre tipos de crimes realizados na
+  cidade de Los Angeles - EUA}
+\author{Prof. Fabrício Jailson Barth}
+\date{$1^{o}$ semestre de 2015}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
+  em Big Data}{}
+
+\section{Introdução}
+
+Crimes que acontecem em uma cidade podem ser agrupados em
+transações. A partir destas transações é possível estabelecer
+associações entre tipos de crimes.
+
+O objetivo deste trabalho é identificar regras de associação entre
+tipos de crimes que aconteceram na cidade de Los Angeles entre $1^{o}$
+de novembro e 31 de dezembro de 2014.
+
+Neste trabalho as ocorrências de crimes serão agrupadas levando-se em
+consideração a região onde o crime aconteceu, a data e o horário do dia.      
+
+\section{Dados}
+
+Várias cidades e países tem implementado iniciativas de \textit{Open
+  Data}. Los Angeles\footnote{https://data.lacity.org/} talvez é uma
+das cidades no mundo com maior nível de maturidade no uso de
+\textit{Open Data}.
+
+Os registros sobre crimes que ocorreram na cidade de Los Angeles em
+2014 podem ser encontrados em
+\footnote{https://data.lacity.org/A-Safe-City/LAPD-Crime-and-Collision-Raw-Data-2014/eta5-h8qx}. Para
+este trabalho foi aplicado um filtro sobre os dados acima restringindo
+a lista de ocorrências de crimes para somente aquelas que ocorreram
+entre $1^{o}$ de novembro e 31 de dezembro de 2014. O resultado desta consulta pode ser encontrado em
+\footnote{https://raw.githubusercontent.com/fbarth/posGraduacao/master/ExemplosRegrasAssociacao/dataset/LAPD\_Crime\_and\_Collision\_Raw\_Data\_-\_2014.csv}. 
+
+Estes dados precisam ser pré-processados para serem representados no
+formato de transações. A primeira etapa consiste em ler os dados e
+converter os tipos:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+ocorrencias <- read.csv("dataset/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
+ocorrencias <- ocorrencias[,c(3,4,6,9)]
+ocorrencias$periodo <- ifelse(ocorrencias$TIME.OCC < 600, "Madrugada",
+                         ifelse(ocorrencias$TIME.OCC < 1200, "Manha",
+                         ifelse(ocorrencias$TIME.OCC < 1800, "Tarde", "Noite")))
+ocorrencias$TIME.OCC <- NULL
+names(ocorrencias) <- c('data','area','descricao','periodo')
+ocorrencias$data <- as.Date(ocorrencias$data, format = '%m/%d/%Y')
+\end{lstlisting}
+
+Depois, é possível fazer uma breve análise exploratória sobre os
+dados, por exemplo: calculando e imprimindo a quantidade de crimes
+por dia:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+library(dplyr)
+byData <- group_by(ocorrencias, data)
+sumData <- summarize(byData, count=n())
+plot(sumData$count ~ sumData$data, type='l', 
+     col='red', main="Quantidade de crimes por dia na cidade de Los Angeles", 
+     xlab="Período", ylab="Quantidade de crimes")
+\end{lstlisting}
+
+Calculando e imprimindo a quantidade de crimes por região:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+par(las=2)
+par(cex.axis=0.6)
+barplot(table(ocorrencias$area), main="Quantidade de crimes por região",
+     xlab="Região", ylab="Quantidade", col="cyan")
+\end{lstlisting}
+
+Calculando e imprimindo a quantidade de ocorrências por crime:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+par(cex.axis=0.3)
+barplot(sort(table(ocorrencias$descricao), decreasing = TRUE), 
+        main="Quantidade de ocorrências por crime",
+        xlab="Crimes", ylab="Quantidade", col="cyan")
+\end{lstlisting}
+
+\begin{figure}[htbp]
+\centering 
+\resizebox*{1\columnwidth}{0.45\textheight}
+{\includegraphics{quantidadeCrimes.png}}
+\caption{Quantidade de ocorrências por crime: este gráfico ilustra a
+  quantidade de ocorrências por tipo de crime. No eixo x são
+  apresentados os tipos de crimes com ocorrência no dataset e no eixo
+  y são apresentadas as quantidades das ocorrências.}
+\label{fig:qtdcrime}
+\end{figure}
+
+Na figura \ref{fig:qtdcrime} é possível visualizar que o tipo de crime
+\textit{TRAFFIC DR} ocorre com uma frequencia bem superior aos demais tipos de
+crime. Portanto, este tipo de crime deve ser removido do dataset:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+ocorrencias <- subset(ocorrencias, ocorrencias$descricao != 'TRAFFIC DR #')
+\end{lstlisting}  
+
+Gerando a base de transações de tipo de crimes agrupadas por data,
+região e período do dia:
+
+\begin{lstlisting}[language=R, basicstyle=\small]
+library(arules)
+temp <- data.frame(id=paste(ocorrencias$periodo,
+                    ocorrencias$data,
+                    ocorrencias$area,
+                    sep = "-",
+                    collapse = NULL),
+           crime=ocorrencias$descricao)
+write.csv(temp, file = "dataset/temp_trans.csv")
+
+tr <- read.transactions("dataset/temp_trans.csv", 
+                        format="single", sep=',',
+                        cols = c('id','crime'),
+                        rm.duplicates = TRUE)
+tr
+\end{lstlisting}  
+
+O script, na íntegra, que realiza este pré-processamento pode ser
+encontrado em
+\footnote{https://github.com/fbarth/posGraduacao/blob/master/ExemplosRegrasAssociacao/scripts/analiseLAPDCrime.R}.  
+
+\section{Método de trabalho}
+
+Sugere-se seguir as seguintes etapas para a realização desta análise:
+
+\begin{itemize}
+\item Aquisição, análise exploratório e pré-processamento dos dados
+  com o script citado acima; 
+\item Construção das regras de associação;
+\item Interpretação e análise das regras, e;
+\item Preparação do relatório e principais artefatos que devem ser
+  entregues. 
+\end{itemize}
+
+\section{Itens que devem ser entregues}
+
+Os seguintes itens devem ser entregues:
+
+\begin{itemize}
+\item Um relatório apresentando os principais resultados da
+  análise. Este relatório pode ser entregue na forma de slides,
+  documento PDF ou documento HTML.
+\item Independente do formato do relatório, o conteúdo do mesmo deve
+  possuir os seguintes itens:
+\begin{itemize}
+\item introdução, com descrição do contexto e objetivo do trabalho;
+\item descrição do método utilizado para alcançar o objetivo, e;
+\item conclusão, ou seja, descrição dos resultados encontrados com a
+  análise realizada. 
+\end{itemize}
+\item O relatório deve possuir duas figuras que ilustram e sumarizam
+  bem os achados. Cada uma das figuras deve ter um \textit{caption}
+  com uma descrição autocontida da figura. 
+\item O script que realiza todas as transformações e análises no
+  dataset. Este item geralmente não é entregue para o cliente
+  final. No entanto, será relevante para a avaliação deste trabalho.
+\end{itemize}
+
+\section{Equipes e prazos}
+
+Este trabalho poderá ser feito individualmente ou em dupla e deverá
+ser entregue até o final do curso.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

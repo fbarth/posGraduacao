@@ -43,7 +43,8 @@ barplot(sort(table(ocorrencias$descricao), decreasing = TRUE),
         main="Quantidade de ocorrências por crime",
         xlab="Crimes", ylab="Quantidade", col="cyan")
 
-# Gerando a base de transacoes de tipo de crime agrupadas por data e regiao
+# Gerando a base de transacoes de tipo de crime agrupadas por data, regiao 
+# e periodo do dia.
 library(arules)
 temp <- data.frame(id=paste(ocorrencias$periodo,ocorrencias$data,ocorrencias$area,sep = "-",collapse = NULL),
                    crime=ocorrencias$descricao)

@@ -96,7 +96,7 @@ png(filename = paste(dir,"plotSeguranca.png", sep=""),
     height = 600, width = 800, pointsize = 18)
 plot(USArrests$UrbanPop, USArrests$Assault,
      main="Outra visão sobre o dataset",
-     xlab="Percentual da população hurbana",
+     xlab="Percentual da população urbana",
      ylab="Assaltantes presos", pch=19,
      col="blue")
 text(USArrests$UrbanPop, USArrests$Assault, 

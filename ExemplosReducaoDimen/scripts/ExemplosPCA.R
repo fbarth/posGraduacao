@@ -8,12 +8,13 @@ biplot(pca)
 
 library(kernlab)
 data("spam")
+class <- spam[,58]
 spam <- spam[,-58]
 pca <- prcomp(spam, scale. = TRUE)
 summary(pca)
 plot(spam[,34], spam[,32])
 smallSpan <- spam[,c(34,32)]
-pcaSmall <- princomp(smallSpan, cor=TRUE, scores = TRUE)
+pcaSmall <- prcomp(smallSpan, scale. = TRUE)
 plot(pcaSmall$scores)
 summary(pcaSmall)
 

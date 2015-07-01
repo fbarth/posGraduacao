@@ -3,3 +3,16 @@ na disciplina de Modelagem Descritiva e Preditiva do curso de
 Pos Graduacao da BandTec.
 
 A organizacao dos projetos sera por aula.
+A sequencia com que os assuntos sao apresentados sao:
+
+ExerciciosAula01: alguns exemplos e exercicios sobre analise 
+exploratoria de dados utilizando conceitos de estatistica descritiva.
+
+ExemplosClustering: exemplos e exercicios sobre algoritmos de
+clustering planos e hierarquicos.
+
+ExemplosReducaoDimen: exemplos sobre PCA.
+
+ExemplosRegrasAssociacao: exemplos e exercicios sobre regras
+de associacao.
+

@@ -1,0 +1,328 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{babel}
+\usepackage{graphics}
+\usepackage{color}
+\usepackage{epsfig}
+\usepackage{alltt,fancyvrb}
+\usepackage{listings}
+\usepackage{float,ctable}
+\usepackage{dentitle}
+\usepackage{personal}
+
+\renewcommand{\rmdefault}{cmss}
+
+\graphicspath{ {../results/} }
+
+\renewcommand{\rmdefault}{cmss}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=R,
+  aboveskip=5mm,
+  belowskip=5mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+
+\title{Descobrindo relações entre categorias de conteúdo em redes
+  sociais frequentadas por adolescentes}
+\author{Prof. Fabrício Jailson Barth}
+\date{$2^{o}$ semestre de 2015}
+\makedendentitle{Faculdade de Tecnologia Bandeirantes - BandTec}{Pós Graduação
+  em Big Data}{}
+
+\section{Introdução}
+
+Interagir com amigos em redes sociais, tais como Facebook e MySpace,
+tem se tornado um ritual entre os adolescentes do mundo todo. Estes
+adolescentes, ao mesmo tempo que interagem com os seus amigos, também
+estão sugeitos a propagandas de diversos produtos e empresas.
+
+É muito importante para as empresas, e até mesmo para os usuários de
+redes sociais, que tais propagandas sejam melhor direcionadas, ou
+seja, que sejam entregues para aqueles que realmente tem interesse naquele
+tipo de produto.
+
+Dado o texto produzido por adolescentes em Serviços de Redes Sociais,
+acredita-se que podemos identificar relações entre os textos, por
+exemplo: 80\% das pessoas que escrevem ou lêem sobre futebol também
+lêem ou escreve sobre basquete. O conhecimento deste tipo de relação é
+importante para a personalização de layouts e conteúdos, assim como a
+recomendação de conteúdo.
+
+O objetivo deste estudo é identificar relações entre tipos de
+conteúdos produzidos e consumidos em uma rede social.  
+
+\section{Método}
+
+O método utilizado por esta análise é composto pelas seguintes fases:
+aquisição e pré-processamento dos dados; construção do modelo, e;
+análise do modelo. 
+
+\section{Aquisição e pré-processamento dos dados}
+
+Para esta análise, nós vamos utilizar um dataset que representa uma
+amostra aleatória de 30.000 estudantes de \textit{high school}
+americana que possuem perfil em uma rede social\footnote{Em inglês,
+  Social Network System - SNS} em 2006. O dataset pode ser encontrado em
+\footnote{https://raw.githubusercontent.com/fbarth/posGraduacao/master/ExemplosClustering/data/snsdata.csv}. 
+
+Os atributos deste dataset são: \textbf{gradyear}: ano de graduação;
+\textbf{gender}: sexo, masculino ou feminino; \textbf{age}: idade
+representada por um número real; \textbf{friends}: quantidade de
+amigos na rede social; \textbf{demais atributos}: basketball,
+football, soccer, entre outros indicam classes onde os textos das
+pessoas foram classificados. Textos de usuários publicados na rede
+social foram processados para gerar esta tabela. 
+
+A aquisição e o pré-processamento dos dados são apresentados abaixo:
+
+\begin{lstlisting}
+snsdata <- read.csv("dataset/snsdata.csv")
+snsdata <- snsdata[,5:40]
+\end{lstlisting}
+
+A linha 1 do código acima é utilizada para a leitura dos dados. Aqui,
+estamos considerando que o arquivo CSV já foi salvo na máquina
+local. O objetivo desta análise é encontrar relações entre as
+categorias dos textos e posts das pessoas, por isso, a segunda linha
+filtra os atributos pessoais (gradyear, gender, age, friends).
+
+Para utilizarmos o algoritmo \textbf{Apriori} sobre este dataset, é
+necessário converser os valores números em categóricos. A função
+$map\_to\_boolean$ implementa esta conversão.
+
+\begin{lstlisting}
+map_to_boolean <- function(attr){
+  attr <- ifelse(attr >= 1, TRUE, FALSE)
+}
+\end{lstlisting} 
+
+Para utilizar a função acima sobre o dataset analisado, basta executar
+a linha abaixo:
+
+\begin{lstlisting}
+snsdata <- as.data.frame(sapply(snsdata, map_to_boolean))
+\end{lstlisting}
+
+O dataset $snsdata$ está no formato $data.frame$. Para utilizarmos o
+algoritmo $Apriori$ com este dataset, precisamos converter o dataset
+para o tipo $transactions$, como apresentado abaixo:
+
+\begin{lstlisting}
+tr <- as(snsdata, "transactions")
+\end{lstlisting}
+
+\section{Análise Descritiva e Construção do modelo}
+
+Os itens mais frequentes são apresentados na figura \ref{fig:freq}.
+
+\begin{figure}[htbp]
+\center
+\includegraphics[scale=0.5]{itensFrequentes.png}
+\caption{Itens mais frequentes encontradas nas transações}
+\label{fig:freq}
+\end{figure}
+
+Para a construção das regras foram utilizados o valor de suporte igual
+a 0.01 e confiança igual a 0.6. Levando-se em consideração estes
+valores de suporte e confiança foram encontradas 596 regras. 
+
+Na figura \ref{fig:regras} é possível visualizar as regras levando-se
+em consideração o suporte, confiança e lift de cada regra. Na figura
+\ref{fig:regras} é possível visualizar que a maioria das regras tem um
+suporte próximo de 0.02, que existem poucas regras com confiança maior
+que 0.8 e que o lift das regras varia de 2 até 12. A maioria das
+regras esta concentrada entre suporte de 0.01 até 0.02 e confiança
+entre 0.6 e 0.8. Algumas das regras que se encontram entre este espaço
+tem lift de até 12.
+
+\begin{figure}[htbp]
+\center
+\includegraphics[scale=0.4]{regras.png}
+\caption{Distribuição das regras levando-se em consideração o suporte,
+confiança e lift.}
+\label{fig:regras}
+\end{figure}
+
+Na figura \ref{fig:consequentes} é possível visualizar uma matriz de
+antecedentes (LHS) versus consequentes (RHS) colorida levando-se em
+consideração os valores de confiança e lift.
+
+\begin{figure}[htbp]
+\center
+\includegraphics[scale=0.4]{regras2.png}
+\caption{Distribuição das regras levando-se em consideração os
+  antecedentes e consequentes de cada regra.}
+\label{fig:consequentes}
+\end{figure}
+
+Através da figura \ref{fig:consequentes} é possível verificar que das
+36 classes de conteúdo, apenas 10 estão do lado direito da regra.
+A maioria das regras possuem como consequente os itens \textit{hair}
+(item 1) e \textit{music} (item 10). A lista de itens é apresentada abaixo:
+
+\begin{lstlisting}
+Itemsets in Consequent (RHS)
+ [1] "{hair}" "{sex}" "{kissed}" "{band}" "{football}" "{basketball}" "{god}"       
+ [8] "{shopping}" "{hollister}" "{music}"
+\end{lstlisting}
+
+Os comandos utilizados para gerar as figuras \ref{fig:regras} e
+\ref{fig:consequentes} são apresentados abaixo:
+
+\begin{lstlisting}
+plot(rules)
+plot(rules, method = "matrix", measure = c("lift", "confidence"),
+     control = list(reorder = TRUE))
+\end{lstlisting}
+
+Para fazer uma análise mais detalhada das regras geradas, optou-se por
+apresentar apenas as cinco regras com maior confiança e as cinco
+regras com maior lift.
+
+As cinco regras com maior confiança foram identificadas através dos
+comandos:
+
+\begin{lstlisting}
+rules1 <- head(sort(rules, by="confidence"), 5)
+plot(rules1, method="graph", control=list(type="items"),
+     main="Cinco regras com maior confiança")
+\end{lstlisting}
+
+A figura \ref{fig:confianca} apresenta de forma gráfica as regras com
+maior confiança encontradas e a tabela \ref{tab:confianca} apresenta a
+mesma informação no formato de tabela. Ao ver tanto a figura
+\ref{fig:confianca}, como a informação contida na tabela
+\ref{tab:confianca} é fácil percebe que quando uma pessoa acessa
+conteúdos sobre \textit{marching} ou quando uma pessoa acessa
+conteúdos sobre \textit{marching} e \textit{music} em 94\% ela irá
+acessar conteúdo sobre \textit{band} também. Por outro lado,
+combinações dos temas \textit{sex,music,blonde,kissed,clothes} e
+\textit{band} levam ao tema \textit{hair} com uma confiança sempre
+maior que 90\%. 
+
+\begin{figure}[htbp]
+\center
+\includegraphics[scale=0.4]{regrasConfianca.png}
+\caption{Representação gráfica das 5 regras identificadas com maior confiança.}
+\label{fig:confianca}
+\end{figure}
+
+% latex table generated in R 3.2.1 by xtable 1.7-4 package
+% Tue Aug 18 14:08:56 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllrrr}
+  \hline
+ & lhs & rhs & support & confidence & lift \\ 
+  \hline
+14 & \{marching,music\} & \{band\} & 0.02 & 0.95 & 6.49 \\ 
+  2 & \{marching\} & \{band\} & 0.03 & 0.94 & 6.38 \\ 
+  337 & \{sex,music,blonde\} & \{hair\} & 0.01 & 0.92 & 4.08 \\ 
+  351 & \{sex,kissed,clothes\} & \{hair\} & 0.01 & 0.90 & 4.02 \\ 
+  357 & \{sex,kissed,band\} & \{hair\} & 0.01 & 0.90 & 3.99 \\ 
+   \hline
+\end{tabular}
+\caption{Cinco regras identificadas com maior confiança.}
+\label{tab:confianca}
+\end{table}
+
+A figura \ref{fig:lift} apresenta de forma gráfica as regras com
+maior lift encontradas e a tabela \ref{tab:lift} apresenta a
+mesma informação no formato de tabela. Na figura \ref{fig:lift} fica
+bem clara a existência de dois grupos de regras. Um grupo que tem como
+consequência \textit{sex} e \textit{kissed} e outro grupo que tem como
+consequência \textit{hollister}.
+
+\begin{figure}[htbp]
+\center
+\includegraphics[scale=0.4]{regrasLift.png}
+\caption{Representação gráfica das 5 regras identificadas com maior lift.}
+\label{fig:lift}
+\end{figure}
+
+% latex table generated in R 3.2.1 by xtable 1.7-4 package
+% Tue Aug 18 14:55:06 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllrrr}
+  \hline
+ & lhs & rhs & support & confidence & lift \\ 
+  \hline
+18 & \{shopping,abercrombie\} & \{hollister\} & 0.01 & 0.64 & 12.20 \\ 
+  19 & \{music,abercrombie\} & \{hollister\} & 0.01 & 0.61 & 11.74 \\ 
+  359 & \{sex,band,hair\} & \{kissed\} & 0.01 & 0.63 & 9.92 \\ 
+  24 & \{kissed,drugs\} & \{sex\} & 0.01 & 0.76 & 7.15 \\ 
+  75 & \{kissed,drunk\} & \{sex\} & 0.01 & 0.73 & 6.91 \\ 
+   \hline
+\end{tabular}
+\caption{Cinco regras identificadas com maior lift.}
+\label{tab:lift}
+\end{table}
+
+\section{Considerações}
+
+O objetivo deste trabalho foi identificar relações entre tipos de
+conteúdos produzidos e consumidos em uma rede social por
+adolescentes. Neste estudo foram considerados uma amostra de 30.000
+pessoas que acessaram conteúdo classificado em 36 tipos diferentes,
+entre eles: \textit{basketball}, \textit{football}, \textit{soccer},
+\textit{sex}, \textit{kissed}, entre outros. 
+
+Identificou-se que os assuntos mais populares nesta amostra são:
+\textit{music} presente em mais de 40\% dos perfis dos usuários, \textit{god} e
+\textit{shopping} presentes em mais de 20\% dos perfis dos usuários. 
+
+Para identificar as relações foi utilizado o algoritmo
+\textit{Apriori} e cada perfil de usuário foi considerado como uma
+transação. Foram utilizados o valor de suporte igual a 0.01 e
+confiança igual a 0.6. Foram encontradas 596 regras.
+
+As regras com confiança maior que 90\% são regras relacionadas a
+\textit{band} e \textit{hair}, por exemplo: quando alguém acessa
+material sobre \textit{marching} e \textit{music} então com 95\% de
+confiança também irá acessar conteúdo sobre \textit{band}. Quando
+alguém acessa material sobre \textit{sex} e \textit{kissed} e
+\textit{blonde} então com 92\% de confiança também irá acessar
+material sobre \textit{hair} (tabela \ref{tab:confianca}).
+
+As regras com maior lift são regras que tem como consequência
+categorias com menor frequência, entre elas: \textit{hollister},
+\textit{kissed} e \textit{sex}. Na figura \ref{fig:lift} e na
+tabela \ref{tab:lift} fica claro a relação das categorias
+\textit{kissed}, \textit{drugs} e \textit{drunk} com \textit{sex} e
+\textit{shopping}, \textit{abercrombie} e \textit{music} com
+\textit{hollister}. O suporte das regras relacionadas com
+\textit{hollister} tem um suporte maior que as outras regras.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+

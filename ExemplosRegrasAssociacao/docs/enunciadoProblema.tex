@@ -13,6 +13,30 @@
 
 \renewcommand{\rmdefault}{cmss}
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=R,
+  aboveskip=5mm,
+  belowskip=5mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
 \begin{document}
 
 \title{Descobrindo regras de associação entre tipos de crimes realizados na
@@ -54,7 +78,7 @@ Estes dados precisam ser pré-processados para serem representados no
 formato de transações. A primeira etapa consiste em ler os dados e
 converter os tipos:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 ocorrencias <- read.csv("dataset/LAPD_Crime_and_Collision_Raw_Data_-_2014.csv")
 ocorrencias <- ocorrencias[,c(3,4,6,9)]
 ocorrencias$periodo <- ifelse(ocorrencias$TIME.OCC < 600, "Madrugada",
@@ -69,7 +93,7 @@ Depois, é possível fazer uma breve análise exploratória sobre os
 dados, por exemplo: calculando e imprimindo a quantidade de crimes
 por dia:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 library(dplyr)
 byData <- group_by(ocorrencias, data)
 sumData <- summarize(byData, count=n())
@@ -80,7 +104,7 @@ plot(sumData$count ~ sumData$data, type='l',
 
 Calculando e imprimindo a quantidade de crimes por região:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 par(las=2)
 par(cex.axis=0.6)
 barplot(table(ocorrencias$area), main="Quantidade de crimes por região",
@@ -89,7 +113,7 @@ barplot(table(ocorrencias$area), main="Quantidade de crimes por região",
 
 Calculando e imprimindo a quantidade de ocorrências por crime:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 par(cex.axis=0.3)
 barplot(sort(table(ocorrencias$descricao), decreasing = TRUE), 
         main="Quantidade de ocorrências por crime",
@@ -111,14 +135,14 @@ Na figura \ref{fig:qtdcrime} é possível visualizar que o tipo de crime
 \textit{TRAFFIC DR} ocorre com uma frequencia bem superior aos demais tipos de
 crime. Portanto, este tipo de crime deve ser removido do dataset:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 ocorrencias <- subset(ocorrencias, ocorrencias$descricao != 'TRAFFIC DR #')
 \end{lstlisting}  
 
 Gerando a base de transações de tipo de crimes agrupadas por data,
 região e período do dia:
 
-\begin{lstlisting}[language=R, basicstyle=\small]
+\begin{lstlisting}
 library(arules)
 temp <- data.frame(id=paste(ocorrencias$periodo,
                     ocorrencias$data,
